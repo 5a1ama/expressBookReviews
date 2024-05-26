@@ -65,7 +65,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   if(review)
     reviewObject[username] = review;
 
-  return res.status(200).json({message: "Review Updated"});
+  return res.status(200).json({message: `Review for the book ${isbn} has been Updated`});
 });
 
 regd_users.delete("/auth/review/:isbn", (req, res) => {
@@ -77,8 +77,10 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
 
   if(reviewObject[username])
     delete reviewObject[username];
+  else
+    return res.status(200).json({message: "There is no Review for this user to delete"});
 
-  return res.status(200).json({message: "Review Deleted"});
+  return res.status(200).json({message: `Review for the book ${isbn} has been Deleted`});
 })
 
 
